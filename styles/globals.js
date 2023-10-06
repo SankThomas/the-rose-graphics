@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const globals = StyleSheet.create({
+  pageContainer: {
+    paddingVertical: 32,
+    paddingHorizontal: 16,
+  },
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
@@ -13,7 +17,12 @@ export const globals = StyleSheet.create({
   },
   heading: {
     fontSize: 32,
-    fontFamily: "catamaranbold",
+    fontFamily: "grotesk",
+    color: "#020D4D",
+  },
+  pageHeading: {
+    fontSize: 20,
+    fontFamily: "grotesk",
     color: "#020D4D",
   },
   text: {
@@ -24,7 +33,7 @@ export const globals = StyleSheet.create({
   button: {
     backgroundColor: "#020D4D",
     color: "#ffffff",
-    fontFamily: "catamaranbold",
+    fontFamily: "grotesk",
     textAlign: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
