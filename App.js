@@ -2,18 +2,18 @@ import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { Image, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
-import { globals } from "./styles/globals";
 
 // Screens
 import Home from "./screens/Home";
 import Designs from "./screens/Designs";
 import Settings from "./screens/Settings";
 import Service from "./screens/Service";
+import HeaderIcon from "./components/HeaderIcon";
+import Design from "./screens/Design";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +26,7 @@ function AppTabs({ navigation }) {
           backgroundColor: "#ffffff",
         },
         headerTitleStyle: {
-          fontFamily: "catamaranbold",
+          fontFamily: "grotesk",
         },
         headerTintColor: "#020D4D",
         tabBarActiveBackgroundColor: "#020D4D",
@@ -37,7 +37,7 @@ function AppTabs({ navigation }) {
         },
         tabBarLabelStyle: {
           paddingBottom: 6,
-          fontFamily: "catamaranregular",
+          fontFamily: "inter",
         },
       }}
     >
@@ -45,15 +45,8 @@ function AppTabs({ navigation }) {
         name="Home"
         component={Home}
         options={{
-          headerTitle: "Welcome",
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-              <Image
-                source={require("./assets/icon.png")}
-                style={globals.profileImage}
-              />
-            </TouchableOpacity>
-          ),
+          headerTitle: "The Rose Graphics",
+          headerRight: () => <HeaderIcon navigation={navigation} />,
           tabBarIcon: ({ color }) => (
             <AntDesign name="home" size={24} color={color} />
           ),
@@ -64,14 +57,7 @@ function AppTabs({ navigation }) {
         component={Designs}
         options={{
           headerTitle: "Designs",
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-              <Image
-                source={require("./assets/icon.png")}
-                style={globals.profileImage}
-              />
-            </TouchableOpacity>
-          ),
+          headerRight: () => <HeaderIcon navigation={navigation} />,
           tabBarIcon: ({ color }) => (
             <AntDesign name="antdesign" size={24} color={color} />
           ),
@@ -83,10 +69,10 @@ function AppTabs({ navigation }) {
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export default function App({ navigation }) {
   const [fontsLoaded] = useFonts({
-    catamaranbold: require("./assets/fonts/Catamaran-ExtraBold.ttf"),
-    catamaranregular: require("./assets/fonts/Catamaran-Regular.ttf"),
+    inter: require("./assets/fonts/Inter-Regular.ttf"),
+    grotesk: require("./assets/fonts/SpaceGrotesk-Bold.ttf"),
   });
 
   useEffect(() => {
@@ -105,16 +91,17 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="#020D4D" style="light" />
+      {/* <StatusBar backgroundColor="#020D4D" style="light" /> */}
       <Stack.Navigator
         screenOptions={{
           gestureEnabled: true,
           gestureDirection: "vertical",
           animation: "slide_from_bottom",
           headerTitleStyle: {
-            fontFamily: "catamaranbold",
+            fontFamily: "grotesk",
           },
           headerShadowVisible: false,
+          headerTintColor: "#020D4D",
         }}
       >
         <Stack.Screen
@@ -127,7 +114,21 @@ export default function App() {
         />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Designs" component={Designs} />
-        <Stack.Screen name="Service" component={Service} />
+        <Stack.Screen
+          name="Design"
+          component={Design}
+          options={{
+            headerShown: false,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Service"
+          component={Service}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
