@@ -10,7 +10,28 @@ import {
 import React from "react";
 import { globals } from "../styles/globals";
 
-export default function Designs() {
+const designs = [
+  {
+    image:
+      "https://res.cloudinary.com/dbwj8dzpm/image/upload/v1696528734/cld-sample-5.jpg",
+    title: "Brochures",
+    desc: "Lose away off why half led have near bed. At engage simple father of period others except. My giving do summer of though narrow marked at. Spring formal no county ye waited. My whether cheered at regular it of promise blushes perhaps. Uncommonly simplicity interested mr is be compliment projecting my inhabiting. Gentleman he september in oh excellent.",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dbwj8dzpm/image/upload/v1696528734/cld-sample-4.jpg",
+    title: "Book Covers",
+    desc: "Lose away off why half led have near bed. At engage simple father of period others except. My giving do summer of though narrow marked at. Spring formal no county ye waited. My whether cheered at regular it of promise blushes perhaps. Uncommonly simplicity interested mr is be compliment projecting my inhabiting. Gentleman he september in oh excellent.",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dbwj8dzpm/image/upload/v1696528733/cld-sample-3.jpg",
+    title: "Logo Design",
+    desc: "Lose away off why half led have near bed. At engage simple father of period others except. My giving do summer of though narrow marked at. Spring formal no county ye waited. My whether cheered at regular it of promise blushes perhaps. Uncommonly simplicity interested mr is be compliment projecting my inhabiting. Gentleman he september in oh excellent.",
+  },
+];
+
+export default function Designs({ navigation }) {
   return (
     <SafeAreaView style={globals.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -18,70 +39,24 @@ export default function Designs() {
           <Text style={globals.heading}>All Designs</Text>
 
           <View style={[globals.topMargin, styles.cards]}>
-            <TouchableOpacity style={styles.card}>
-              <ImageBackground
-                source={{
-                  uri: "https://images.pexels.com/photos/326612/pexels-photo-326612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                }}
-                resizeMode="cover"
-                borderRadius={16}
-                style={styles.image}
+            {designs.map((design, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.card}
+                onPress={() => navigation.navigate("Design", design)}
               >
-                <Text style={styles.overlayText}>Large text</Text>
-              </ImageBackground>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.card}>
-              <ImageBackground
-                source={{
-                  uri: "https://images.pexels.com/photos/3109807/pexels-photo-3109807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                }}
-                resizeMode="cover"
-                borderRadius={16}
-                style={styles.image}
-              >
-                <Text style={styles.overlayText}>Large text</Text>
-              </ImageBackground>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.card}>
-              <ImageBackground
-                source={{
-                  uri: "https://images.pexels.com/photos/1556707/pexels-photo-1556707.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                }}
-                resizeMode="cover"
-                borderRadius={16}
-                style={styles.image}
-              >
-                <Text style={styles.overlayText}>Large text</Text>
-              </ImageBackground>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.card}>
-              <ImageBackground
-                source={{
-                  uri: "https://images.pexels.com/photos/1509534/pexels-photo-1509534.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                }}
-                resizeMode="cover"
-                borderRadius={16}
-                style={styles.image}
-              >
-                <Text style={styles.overlayText}>Large text</Text>
-              </ImageBackground>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.card}>
-              <ImageBackground
-                source={{
-                  uri: "https://images.pexels.com/photos/1888883/pexels-photo-1888883.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                }}
-                resizeMode="cover"
-                borderRadius={16}
-                style={styles.image}
-              >
-                <Text style={styles.overlayText}>Large text</Text>
-              </ImageBackground>
-            </TouchableOpacity>
+                <ImageBackground
+                  source={{
+                    uri: design.image,
+                  }}
+                  resizeMode="cover"
+                  borderRadius={16}
+                  style={styles.image}
+                >
+                  <Text style={styles.overlayText}>{design.title}</Text>
+                </ImageBackground>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
       </ScrollView>
@@ -106,6 +81,6 @@ const styles = StyleSheet.create({
   overlayText: {
     color: "#ffffff",
     fontSize: 42,
-    fontFamily: "catamaranbold",
+    fontFamily: "grotesk",
   },
 });
